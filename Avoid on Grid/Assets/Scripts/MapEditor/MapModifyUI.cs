@@ -40,6 +40,8 @@ public class MapModifyUI : MonoBehaviour
             objbtn.image.color = new Color(1, 1, 1, 0.8f);
             timelimebtn.image.color = new Color(1, 1, 1, 1);
             closebtn.image.color = new Color(1, 1, 1, 1);
+
+            MapEditorManager.manager.ChangeSpawnPrefeb();
         }
 
         if (isClose)
@@ -50,6 +52,7 @@ public class MapModifyUI : MonoBehaviour
             closebtn.gameObject.SetActive(false);
 
             openbtn.gameObject.SetActive(true);
+            MapEditorManager.manager.ChangeSpawnPrefeb();
         }
         else
         {

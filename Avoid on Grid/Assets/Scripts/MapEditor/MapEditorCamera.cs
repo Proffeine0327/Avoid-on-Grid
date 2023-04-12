@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class MapEditorCamera : MonoBehaviour
 {
+    public static MapEditorCamera manager { get; private set; }
+
     private Camera cam;
     private Vector3 dragOrigin;
 
+    public Vector3 WorldMousePosition => cam.ScreenToWorldPoint(Input.mousePosition);
+
     private void Awake() 
     {
+        manager = this;
         cam = GetComponent<Camera>();    
     }
 
@@ -22,13 +27,13 @@ public class MapEditorCamera : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(1))
         {
-            dragOrigin = cam.ScreenToWorldPoint(Input.mousePosition);
+            dragOrigin = WorldMousePosition;
             return;
         }
 
         if(!Input.GetMouseButton(1)) return;
 
-        var diff = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        var diff = WorldMousePosition - transform.position;
         transform.position = dragOrigin - diff;
     }
 
