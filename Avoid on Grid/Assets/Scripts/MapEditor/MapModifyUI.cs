@@ -12,6 +12,8 @@ public class MapModifyUI : MonoBehaviour
     [SerializeField] private Button openbtn;
     [SerializeField] private Button closebtn;
     [SerializeField] private Image bg;
+    [SerializeField] private GameObject objUI;
+    [SerializeField] private GameObject timelineUI;
     [SerializeField] private MapModifyUIState state;
     [SerializeField] private bool isClose;
 
@@ -27,6 +29,12 @@ public class MapModifyUI : MonoBehaviour
     }
 
     private void Update()
+    {
+        ButtonEvent();
+        DisplayStateUI();
+    }
+
+    private void ButtonEvent()
     {
         if (state == MapModifyUIState.obj)
         {
@@ -62,6 +70,21 @@ public class MapModifyUI : MonoBehaviour
             closebtn.gameObject.SetActive(true);
             
             openbtn.gameObject.SetActive(false);
+        }
+    }
+
+    private void DisplayStateUI()
+    {
+        if(state == MapModifyUIState.obj)
+        {
+            objUI.SetActive(true);
+            timelineUI.SetActive(false);
+        }
+
+        if(state == MapModifyUIState.timeline)
+        {
+            timelineUI.SetActive(true);
+            objUI.SetActive(false);
         }
     }
 }
